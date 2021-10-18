@@ -1,0 +1,146 @@
+@startuml
+
+' -- Definitions ---------------------------------------------------------------
+
+!include ../definitions/erd.iuml
+
+' -- Sizes ---------------------------------------------------------------------
+
+!$sizes = {
+    "small":  10,
+    "normal": 12,
+    "big":    14
+}
+
+
+' -- Fonts ---------------------------------------------------------------------
+
+!$fonts = {
+    "main": "Rubik",
+    "mono": "Rubik"
+}
+
+
+' -- Entity Colors -------------------------------------------------------------
+
+!$data = {
+    "entities" : [{
+        "name":                  "View",
+        "backgroundColor":       "ffc6ec",
+        "borderColor":           "cf70e0",
+        "circleBackgroundColor": "ffc6ec",
+        "circleBorderColor":     "cf70e0"
+    }, {
+        "name":                  "Controller",
+        "backgroundColor":       "f8f9ac",
+        "borderColor":           "edb168",
+        "circleBackgroundColor": "f8f9ac",
+        "circleBorderColor":     "edb168"
+    }, {
+        "name":                  "Hook",
+        "backgroundColor":       "deffaf",
+        "borderColor":           "6eef7d",
+        "circleBackgroundColor": "deffaf",
+        "circleBorderColor":     "6eef7d"
+    }]
+}
+
+' -- Colors --------------------------------------------------------------------
+
+!$colors = {
+    "BackgroundColor":             "white",
+    "NodeBackgroundColor":         "white",
+    "HeaderBackgroundColor":       "azure",
+    "NodeBorderColor":             "#282828",
+    "TextColor":                   "#282828"
+}
+
+' -- Skinparam -----------------------------------------------------------------
+
+skinparam BackgroundColor          $colors.BackgroundColor
+skinparam Shadowing                true
+skinparam Padding                  0
+skinparam RoundCorner              2
+
+
+skinparam Default {
+    FontName                       $fonts.main
+    FontColor                      $colors.TextColor
+    MonospacedFontName             $fonts.mono
+}
+
+
+skinparam Arrow {
+    Color                          $colors.TextColor
+    FontColor                      $colors.TextColor
+    'FontName
+    'FontSize
+    'FontStyle
+    LollipopColor                  $colors.TextColor
+    MessageAlignment               center
+    Thickness                      1
+}
+
+
+/'
+skinparam Rectangle {
+    BorderStyle<<Folder>>          dashed
+    BorderStyle                    dashed
+}
+
+skinparam Package {
+    BackgroundColor                $package.bg
+    BorderColor                    %darken($package.bg, 50)
+    BorderThickness                .8
+    'FontName                      $fonts.mono
+    FontSize                       $sizes.normal
+    FontStyle                      normal
+}
+
+
+
+'/
+skinparam Class {
+    BackgroundColor               $colors.NodeBackgroundColor
+    BorderColor                   $colors.NodeBorderColor
+    BorderThickness               .8
+
+    'FontName                      $fonts.mono
+    'FontColor
+    FontStyle                     bold
+    FontSize                      $sizes.big
+
+    Header {
+        BackgroundColor           $colors.HeaderBackgroundColor
+    }
+    Attribute                     white
+    Attribute {
+        FontName                  $fonts.mono
+
+    /'
+        FontColor      $diagram.primary
+        FontSize       $sizes.normal
+        FontStyle      normal
+        'IconSize
+    '/
+    }
+    /'
+    Stereotype {
+        FontColor      $diagram.secondary
+        FontSize       $sizes.small
+        FontStyle      normal
+        'FontName
+    }
+    '/
+}
+/'
+skinparam Note {
+    BackgroundColor white
+    BorderColor brown
+}
+'/
+
+
+!include ../definitions/entities.iuml
+
+@enduml

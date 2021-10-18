@@ -1,0 +1,304 @@
+@startuml entities
+
+
+!unquoted procedure entity($stereotype, $name, $package = "")
+    !if ($package == "")
+        class $name << $stereotype >>
+    !else
+        class $package.$name << $stereotype >>
+!endprocedure
+
+
+!foreach $entity in $data.entities
+    skinparam ClassHeaderBackgroundColor<<$entity.name>> $entity.backgroundColor
+    skinparam ClassBorderColor<<$entity.name>> $entity.borderColor
+    skinparam StereotypeCBackgroundColor<<$entity.name>> $entity.circleBackgroundColor
+    skinparam StereotypeCBorderColor<<$entity.name>> $entity.circleBorderColor
+!endfor
+
+' -- Components -------
+
+!unquoted procedure view($name, $mod = "")
+    entity( View, $name, $mod )
+!endprocedure
+
+!unquoted procedure controller($name, $mod = "")
+    entity( Controller, $name, $mod )
+!endprocedure
+
+!unquoted procedure hook($name, $mod = "")
+    entity( Hook, $name, $mod )
+!endprocedure
+
+!unquoted procedure query($name, $mod = "")
+    entity(Query, $name, $mod)
+!endprocedure
+
+!unquoted procedure action($name, $mod = "")
+    entity(Action, $name, $mod)
+!endprocedure
+
+!unquoted procedure event($name, $mod = "")
+    entity(Event, $name, $mod)
+!endprocedure
+
+!unquoted procedure effect($name, $mod = "")
+    entity(Effect, $name, $mod)
+!endprocedure
+
+!unquoted procedure middleware($name, $mod = "")
+    entity(Middleware, $name, $mod)
+!endprocedure
+
+!unquoted procedure store($name, $mod = "")
+    entity(Store, $name, $mod)
+!endprocedure
+
+!unquoted procedure module($name, $package = "")
+    entity(Module, $name, $package)
+!endprocedure
+
+!unquoted procedure service($name, $package = "")
+    entity(Service, $name, $package)
+!endprocedure
+
+!unquoted procedure operation($name, $mod = "")
+    entity(Operation, $name, $mod)
+!endprocedure
+
+!unquoted procedure api($name, $mod = "")
+    entity(API, $name, $mod)
+!endprocedure
+
+!unquoted procedure mock($name, $mod = "")
+    entity(Mock, $name, $mod)
+!endprocedure
+
+/'
+
+!procedure application($name)
+    class $name <<(A, pink)>>
+!endprocedure
+
+!unquoted procedure module($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(M, tomato) Module >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure service($name, $dep1="", , $dep2="", , $dep3="")
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+    class $name <<(S, lightblue) Service >>
+!endprocedure
+
+!unquoted procedure repository($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(R, lightgreen) Repository >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure component($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(C, violet) Component >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure controller($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(C, violet) Controller >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure router($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(C, violet) Router >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure form($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(C, violet) Form >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure control($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(C, yellow) Control >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure field($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(F, lightblue) Field >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure fieldset($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(S, lightgreen) Fieldset >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure form($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(R, lightsalmon) Form >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure wizard($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(W, violet) Wizard >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure view($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(V, lightblue) View >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure function($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(F, lightblue) Function >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure mock($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(M, lightgreen) Mock >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure queries($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(Q, lightsalmon) Queries >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+
+!unquoted procedure api($name, $dep1="", , $dep2="", , $dep3="")
+    class $name <<(A, orange) API >>
+    !if ($dep1 != "")
+        $name <-- $dep1
+    !endif
+    !if ($dep2 != "")
+        $name <-- $dep2
+    !endif
+    !if ($dep3 != "")
+        $name <-- $dep3
+    !endif
+!endprocedure
+'/
+@enduml

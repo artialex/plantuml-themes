@@ -1,0 +1,127 @@
+@startuml
+
+' -- Definitions ---------------------------------------------------------------
+
+!include ../definitions/erd.iuml
+!include ../definitions/entities.iuml
+
+' -- Settings ------------------------------------------------------------------
+
+scale 1.2
+
+hide empty members
+hide circles
+
+left to right direction
+
+' -- Sizes ---------------------------------------------------------------------
+
+!$sizes = {
+    "small":  10,
+    "normal": 12,
+    "big":    14
+}
+
+
+' -- Fonts ---------------------------------------------------------------------
+
+!$fonts = {
+    "main": "Rubik",
+    "mono": "Iosevka SS02 Medium"
+}
+
+
+' -- Colors --------------------------------------------------------------------
+
+!$colors = {
+    "p1":                          "1e2337",
+    "p2":                          "313a57",
+    "p3":                          "272e48",
+    "p4":                          "4466e2",
+    "p5":                          "d2d2d2"
+}
+
+' -- Skinparam -----------------------------------------------------------------
+
+skinparam BackgroundColor          $colors.p1
+skinparam Shadowing                true
+skinparam Padding                  0
+skinparam RoundCorner              2
+
+
+skinparam Default {
+    FontName                       $fonts.main
+    FontColor                      $colors.p5
+    MonospacedFontName             $fonts.mono
+}
+
+
+skinparam Arrow {
+    Color                          $colors.p5
+    FontColor                      $colors.p5
+    'FontName
+    'FontSize
+    'FontStyle
+    LollipopColor                  $colors.p5
+    MessageAlignment               center
+    Thickness                      1
+}
+
+
+
+/'
+skinparam Rectangle {
+    BorderStyle<<Folder>>          dashed
+    BorderStyle                    dashed
+}
+
+skinparam Package {
+    BackgroundColor                $package.bg
+    BorderColor                    %darken($package.bg, 50)
+    BorderThickness                .8
+    'FontName                      $fonts.mono
+    FontSize                       $sizes.normal
+    FontStyle                      normal
+}
+
+
+
+'/
+skinparam Class {
+    BackgroundColor               $colors.p2
+    BorderColor                   $colors.p4
+    BorderThickness               .8
+
+    'FontName
+    'FontColor
+    FontStyle                     bold
+    FontSize                      $sizes.big
+
+    Header {
+        BackgroundColor           $colors.p3
+    }
+/'
+    Attribute                     white
+    Attribute {
+        FontColor      $diagram.primary
+        FontSize       $sizes.normal
+        FontStyle      normal
+        'FontName
+        'IconSize
+    }
+    Stereotype {
+        FontColor      $diagram.secondary
+        FontSize       $sizes.small
+        FontStyle      normal
+        'FontName
+    }
+    '/
+}
+/'
+skinparam Note {
+    BackgroundColor white
+    BorderColor brown
+}
+'/
+
+@enduml

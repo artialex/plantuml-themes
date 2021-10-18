@@ -1,0 +1,33 @@
+@startuml
+
+'skinparam LineType Ortho
+
+!unquoted function row(key, type, text="", symbol="")
+    !local prefix = "<#transparent,#transparent>"
+
+    !if text == ""
+        !local col1 = "|"
+    !else
+        !local col1 = "|" + symbol + text + symbol
+    !endif
+
+    !local col2 = "  |" + symbol + key + symbol
+
+    !local col3 = "  |" + symbol + type + symbol + "|"
+
+    !return prefix + col1 + col2 + col3
+!endfunction
+
+!unquoted function pk(key, type)
+    !return row(key, type, "PK", "**")
+!endfunction
+
+!unquoted function fk(key, type)
+    !return row(key, type, "FK", "//")
+!endfunction
+
+!unquoted function ck(key, type)
+    !return row(key, type)
+!endfunction
+
+@enduml

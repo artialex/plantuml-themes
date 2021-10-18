@@ -1,0 +1,8 @@
+@startuml
+scale 1.2
+
+hide empty members
+'hide circles
+
+left to right direction
+@enduml
