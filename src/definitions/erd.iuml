@@ -1,7 +1,5 @@
 @startuml
 
-'skinparam LineType Ortho
-
 !unquoted function row(key, type, text="", symbol="")
     !local prefix = "<#transparent,#transparent>"
 

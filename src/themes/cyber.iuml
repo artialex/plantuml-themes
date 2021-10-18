@@ -2,8 +2,8 @@
 
 ' -- Definitions ---------------------------------------------------------------
 
-!include ../definitions/erd.iuml
-!include ../definitions/entities.iuml
+'!include ../definitions/erd.iuml
+'!include ../definitions/entities.iuml
 
 ' -- Settings ------------------------------------------------------------------
 
