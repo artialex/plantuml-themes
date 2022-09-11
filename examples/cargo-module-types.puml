@@ -1,0 +1,19 @@
+@startuml
+
+!include https://raw.githubusercontent.com/alextheartisan/plantuml-themes/master/src/themes/coffee.iuml
+
+scale 1
+
+package Cargo {
+    component(Router)
+}
+
+package Cargo.Api {
+}
+
+package Cargo.Items {
+    component(ItemPage)
+    component(AllItemsPage)
+}
+
+@enduml

@@ -1,0 +1,74 @@
+@startuml basic
+
+!include ../../src/themes/pretty.iuml
+
+skinparam Sequence {
+    Participant {
+        Padding 10
+        BackgroundColor white
+        BorderColor black
+        BorderThickness 1
+    }
+    Box {
+        BorderColor transparent
+        Padding 10
+    }
+    Group {
+        FontName Rubik
+        BackgroundColor white
+        BodyBackgroundColor transparent
+        BorderColor #666666
+        BorderThickness 1
+
+        Header {
+            FontName Rubik
+        }
+    }
+}
+
+header Boox API
+'footer Page %page% of %lastpage%
+
+title Create Document
+'skinparam ResponseMessageBelowArrow true
+'autonumber
+
+actor User as U #red
+
+box FrontEnd #efffef
+    participant FrontEnd as FE
+end box
+
+box Server #efefff
+    participant Controller as CTRL
+    participant Service    as SRVC
+    participant Repository as REPO
+end box
+
+database H2 as DB
+
+'boundary    Boundary    as Foo2
+'control     Control     as Foo3
+'entity      Entity      as Foo4
+'collections Collections as Foo6
+'queue       Tube        as T
+
+U     ->   FE    :
+'FE   ->   BE    : request
+'BE   ->   DB    : request
+FE    ->   CTRL  : create(//DocumentDTO//)
+CTRL  ->   SRVC  : create(//DocumentDTO//)
+SRVC  ->   REPO  : save(//DocumentDTO//)
+
+alt success
+    REPO  ->   DB    :
+    DB    ->   DB    : retrieve
+    REPO  <--  DB
+    SRVC  <--  REPO  : //Document//
+else failure
+    SRVC  <--  REPO : Error saving document
+end
+CTRL  <--  SRVC : Optional<Document>
+
+
+@enduml

@@ -1,0 +1,64 @@
+@startuml
+
+!include https://raw.githubusercontent.com/alextheartisan/plantuml-themes/master/src/themes/pretty.iuml
+
+hide empty members
+
+class Sorting {
+    +field: string
+    +order: SortingOrder
+}
+
+enum SortingOrder {
+    Asc
+    Desc
+}
+
+package cargo.items {
+    class ItemsModule <<(M, tomato) Module>> {
+        paths: ItemPaths
+    }
+
+    class ItemPaths {
+        goTo(id: number): void
+        goToAll(): void
+    }
+
+    class ItemService {
+        getOne(id: number): Item
+        getAll(): Item[]
+    }
+
+}
+
+package core {
+    class CoreModule <<(M, tomato) Module>> {
+
+    }
+
+    class RootComponent <<(R, violet) Component>> {
+
+    }
+
+    class MainRouter <<(R, violet) Router>> {
+
+    }
+
+    class Menu <<(R, violet) Component>> {
+
+    }
+
+    CoreModule <-- RootComponent
+    RootComponent <-- MainRouter
+    RootComponent <-- Menu
+}
+
+
+Application <-- ItemsModule
+ItemsModule <-- ItemService
+ItemsModule <-- ItemPaths
+ItemPaths   <-- History
+ItemService <-- Sorting
+Sorting     <-- SortingOrder
+
+@enduml

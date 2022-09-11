@@ -1,0 +1,25 @@
+@startuml
+
+!include https://raw.githubusercontent.com/alextheartisan/plantuml-themes/master/src/themes/pretty.iuml
+
+class Prettier as "prettier-config" {}
+
+class Eslint as "eslint-config" {
+    eslint
+}
+
+class TypeScript as "typescript-config" {
+    typescript
+}
+
+class Limbo {
+}
+
+Prettier --> Eslint
+Prettier --> TypeScript
+
+Prettier --> Limbo
+Eslint --> Limbo
+TypeScript --> Limbo
+
+@enduml

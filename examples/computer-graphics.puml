@@ -1,0 +1,73 @@
+@startuml
+
+scale 1.1
+skinparam DefaultFontName Rubik
+
+left to right direction
+hide empty members
+
+hide circle
+
+title Computer Graphics
+
+/'
+class Vector {
+    Basis Vector
+    Zero Vector
+    Inverse Vector
+    Unit Vector
+    Direction Vector
+}
+
+class Matrix {
+    Zero Matrix
+    Diagonal Matrix
+    Identity Matrix
+    Inverse Matrix
+    Orthogonal Matrix
+}
+
+Vector --> Matrix
+Vector ---> DotProduct
+Vector ---> CrossProduct
+'/
+
+package lighting {
+    class Light
+'     -- AmbientLight
+'     -- DiffuseLight
+'     -- SpecularLight
+'    PhongReflection -- Specular
+'    LambertianReflection -- Specular
+}
+
+
+class Textures
+class Color
+class Shaders
+class Images
+class Rendering
+class LinearTransformations
+class Spaces
+
+class Object3D
+class Mesh
+class Geometry
+class Material
+class Renderer
+class Scene
+Renderer *-- Scene
+Renderer *-- Camera
+Renderer *-- Light
+Object3D <-- Mesh
+Mesh <-- Geometry
+Mesh <-- Material
+Object3D <-- Camera
+
+package images {
+    class Image
+    class Texture
+}
+
+
+@enduml

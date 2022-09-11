@@ -1,0 +1,97 @@
+@startuml
+
+'!include https://raw.githubusercontent.com/future-architect/puml-themes/master/themes/puml-theme-toy.puml
+
+!include ../src/themes/cyber.iuml
+
+skinparam DefaultFontName "Consolas"
+
+entity Mineral {
+    pk(mineralId,   ID)
+    ck(name,        VARCHAR(128))
+    ck(description, VARCHAR(256))
+}
+
+entity Location {
+    pk(locationId, ID)
+}
+
+entity Item {
+    pk(itemId,      ID)
+    fk(mineralId,   ID)
+    fk(locationId,  ID)
+    fk(containerId, ID)
+    ck(condition,   CONDITION)
+    ck(acquiredAt,  DATETIME)
+}
+
+entity Category {
+    pk(categoryId,  ID)
+    ck(name,        VARCHAR(128))
+    ck(description, VARCHAR(256))
+}
+
+entity Container {
+    pk(containerId, ID)
+    ck(name,        VARCHAR(128))
+    ck(description, VARCHAR(256))
+}
+
+Mineral  ||--o{ Item
+Location ||-o{  Item
+Item     }o-||  Container
+Category ||--o{ Mineral
+
+@enduml
+
+@startuml
+
+'!include https://raw.githubusercontent.com/future-architect/puml-themes/master/themes/puml-theme-toy.puml
+
+!include ../src/themes/cyber.iuml
+
+skinparam DefaultFontName "Consolas"
+
+entity Mineral {
+    pk(mineralId,   ID)
+    ck(name,        VARCHAR(128))
+    ck(description, VARCHAR(256))
+}
+
+entity Location {
+    pk(locationId, ID)
+}
+
+entity Item {
+    pk(itemId,      ID)
+    fk(locationId,  ID)
+    fk(containerId, ID)
+    ck(acquiredAt,  DATETIME)
+}
+
+entity Mineral_Item {
+    fk(itemId,    ID)
+    fk(mineralId, ID)
+}
+
+entity Category {
+    pk(categoryId,  ID)
+    ck(name,        VARCHAR(128))
+    ck(description, VARCHAR(256))
+}
+
+entity Container {
+    pk(containerId, ID)
+    ck(name,        VARCHAR(128))
+    ck(description, VARCHAR(256))
+}
+
+Mineral  ||--o{ Mineral_Item
+Mineral_Item  }o--|| Item
+Location ||-o{  Item
+Item     }o-||  Container
+Category ||--o{ Mineral
+
+@enduml
+
+

@@ -1,0 +1,55 @@
+@startuml
+
+'!include https://raw.githubusercontent.com/future-architect/puml-themes/master/themes/puml-theme-toy.puml
+
+!include ../src/themes/coffee.iuml
+
+skinparam DefaultFontName "Consolas"
+
+entity Photo {
+    pk(photoId,     INT)
+    fk(albumId,     INT)
+    fk(locationId,  INT)
+    fk(memberId,    INT)
+    ck(title,       VARCHAR(120))
+    ck(description, VARCHAR(255))
+    ck(privacy,     VARCHAR(20))
+    ck(uploadedAt,  DATETIME)
+    ck(view,        INT)
+    ck(imagePath,   VARCHAR(50))
+}
+
+entity Location {
+    pk(locationId, INT)
+    ck(name,       VARCHAR(200))
+    ck(shortName,  VARCHAR(50))
+}
+
+entity Member {
+    pk(memberId, INT)
+    ck(name,     VARCHAR(255))
+    ck(phone,    VARCHAR(20))
+    ck(email,    VARCHAR(200))
+    ck(address,  VARCHAR(255))
+}
+
+entity Album {
+    pk(albumId,     INT)
+    ck(title,       VARCHAR(120))
+    ck(description, VARCHAR(255))
+    ck(view,        INT)
+}
+
+entity Comment {
+    pk(commentId, INT)
+    fk(photoId,   INT)
+    ck(postedAt,  DATETIME)
+    ck(content,   VARCHAR(255))
+}
+
+Album    ||--o{ Photo
+Location ||-o{  Photo
+Photo    }o-||  Member
+Photo    ||--o{ Comment
+
+@enduml

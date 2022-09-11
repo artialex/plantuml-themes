@@ -1,0 +1,50 @@
+@startuml
+
+!include ../src/themes/pretty.iuml
+
+
+package components {
+    view(View1)
+    view(View2)
+    controller(Controller)
+}
+
+hook(useStore)
+hook(useQuery)
+
+query(Query)
+'action(Action)
+middleware(Middleware)
+
+package flux {
+    event(Event)
+    effect(Effect)
+    store(Store)
+}
+
+
+
+
+module(Module)
+service(Service)
+operation(Operation)
+api(Api)
+mock(Mock)
+
+
+
+
+View1 -- Controller
+View2 -- Controller
+
+Controller -- useStore
+
+useStore -- Store
+
+Effect -- Operation
+
+Operation -- Api
+Operation -- Mock
+
+@enduml
+

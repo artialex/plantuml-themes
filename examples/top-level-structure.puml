@@ -1,0 +1,174 @@
+@startuml
+
+!include includes/definitions.puml
+
+
+'' -- Auth ---------------------------------------------------------------------
+
+package auth {
+    module(Auth)
+    service(Auth)
+    repository(Auth)
+    form(LoginForm)
+    component(PrivateRoute)
+
+/'
+    type("User")
+    type("Credentials")
+'/
+
+    AuthModule <-- AuthService
+    AuthService <-- AuthRepository
+    LoginForm <-- AuthService
+    AuthModule <- LoginForm
+    PrivateRoute <-- AuthService
+    AuthModule <-- PrivateRoute
+}
+
+'' -- Cargo Items --------------------------------------------------------------
+
+
+package cargo.items {
+
+    class Items <<(M, tomato) Module>> {
+        paths:
+    }
+
+    class ItemPaths {
+        one(id: number)
+        all()
+    }
+
+    class ItemService {
+        getOne()
+        getAll()
+        one(id: number)
+        all()
+    }
+
+    class Sorting {
+        +field: string
+        +order: SortingOrder
+    }
+
+    enum SortingOrder {
+        Asc
+        Desc
+    }
+
+
+    repository(ItemRepository)
+    controller(ItemTableController, ItemService)
+    component(AllItemsPage, ItemTableController)
+    component(ItemPage)
+    router(ItemRouter, AllItemsPage, ItemPage)
+    service(ItemService, ItemRepository) {
+        +goTo()
+        +goToAll()
+    }
+    module(ItemModule, ItemService, ItemRouter)
+
+
+'    component(AddItemDialog)
+'    component(ItemPage)
+'    component(AllItemsPage)
+'
+'    ItemsModule <-- ItemService
+'    ItemService <-- ItemRepository
+'    ItemRouter <-- ItemTableController
+'    ItemsModule <-- ItemRouter
+'    AllItemsPage <-- ItemTableController
+'    ItemTableController <-- ItemService
+
+/'
+    Cargo <-- Item
+    Item  <-- ItemService
+    ItemService <-- ItemRepository
+    ItemRepository <-- ApiClient
+    ItemService <-- Logger
+'/
+
+}
+
+
+
+
+
+/'
+package config {
+    module(Config)
+    service(Config)
+
+    ConfigModule <-- ConfigService
+}
+'/
+
+/'
+package loggers {
+    module(Loggers)
+    service(Loggers)
+
+    LoggersModule <-- LoggersService
+    LoggersService <-- ConfigModule
+}
+'/
+
+/'
+package api {
+    module(Api)
+    service(Api)
+    repository(Api)
+
+    ApiModule <-- ApiService
+    ApiService <-- ApiRepository
+
+    ApiRepository <-- ConfigModule
+}
+'/
+
+/'
+    Auth <-- AuthService
+    AuthService <-- AuthRepository
+    AuthRepository <-- ApiClient
+    AuthService <-- Logger
+}
+
+package analytics {
+    module("Analytics")
+    service("AnalyticsService")
+    repository("AnalyticsRepository")
+
+    Analytics <-- AnalyticsService
+    AnalyticsService <-- AnalyticsRepository
+    AnalyticsRepository <-- ApiClient
+    AnalyticsService <-- Logger
+}
+
+package cargo {
+    module("Cargo")
+    component("CargoRouter")
+}
+
+package cargo.minerals {
+    module("Mineral")
+    service("MineralService")
+    repository("MineralRepository")
+
+    Cargo <-- Mineral
+    Mineral  <-- MineralService
+    MineralService <-- MineralRepository
+    MineralRepository <-- ApiClient
+    MineralService <-- Logger
+
+}
+
+application("Application")
+
+
+Application <-- Auth
+Application <-- Analytics
+Application <-- Cargo
+Application <-- Item
+'/
+
+@enduml

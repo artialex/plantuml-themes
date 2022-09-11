@@ -1,0 +1,70 @@
+@startuml
+
+!include ../src/themes/coffee.iuml
+
+rectangle cards {
+    abstract class Card {
+        id: CardId
+        name: string
+        cost: number
+    }
+}
+
+rectangle cardsets {
+    abstract CardSet {
+        constructor(cards: Card[])
+        +shuffle()
+    }
+    CardSet o-- Card
+}
+
+rectangle decks {
+    class DrawPile {
+        -id: sring
+        +cards: Card[]
+
+        +take(from: Position)
+        +takeMany(count: number, from: Position)
+        +peek(from: Position)
+        +peekMany(count: number, from: Position)
+        +put(card: Card, to: Position)
+        +putMany(cards: Card[], to: Position)
+
+        +shuffle()
+    }
+
+    class DiscardPile {
+        +put(card: Card, to: Position)
+        +putMany(cards: Card[], to: Position)
+        +peek(from: Position)
+        +peekMany(count: number, from: Position)
+        +take(from: Position)
+        +takeMany(count: number, from: Position)
+    }
+
+    class Hand {
+        +take(from: Position)
+        +takeMany(count: number, from: Position)
+        +put(card: Card, to: Position)
+        +putMany(cards: Card[], to: Position)
+    }
+
+    class Deck {
+        +take(from: Position)
+        +takeMany(count: number, from: Position)
+        +peek(from: Position)
+        +peekMany(count: number, from: Position)
+        +put(card: Card, to: Position)
+        +putMany(cards: Card[], to: Position)
+
+        +shuffle()
+    }
+
+    enum Position {
+        Top
+        Bottom
+        Random
+    }
+}
+
+@enduml
